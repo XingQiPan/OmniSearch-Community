@@ -2,6 +2,7 @@ import React from 'react';
 import { Tabs } from 'antd';
 import { IconBot, IconSliders } from '../components/icons';
 import { PageHeader, Pill } from '../components/ui';
+import { RelaySpotBanner } from '../components/RelaySpot';
 import { LlmConfigPage } from './LlmConfigPage';
 import { RerankerConfigPage } from './RerankerConfigPage';
 
@@ -14,6 +15,7 @@ export const ModelSettingsPage: React.FC = () => (
       tags={<Pill tone="accent">LLM / Reranker</Pill>}
       subtitle="统一管理对话模型、精排通道与默认策略。"
     />
+    <RelaySpotBanner />
     <Tabs
       defaultActiveKey="llm"
       style={{ marginTop: 16 }}

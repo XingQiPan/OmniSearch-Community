@@ -32,6 +32,7 @@ import { RoutingStudio } from './pages/RoutingStudio';
 import { PlaygroundArena } from './pages/PlaygroundArena';
 import { AuditAndGatewayPage } from './pages/AuditAndGatewayPage';
 import { ApiPlatformPage } from './pages/ApiPlatformPage';
+import { RelaySpotCompact } from './components/RelaySpot';
 
 type NavItem = {
   key: string;
@@ -226,6 +227,8 @@ export const App: React.FC = () => {
               </div>
             ))}
           </nav>
+
+          <RelaySpotCompact />
 
           <div className="sidebar-foot">
             <span className={`dot ${engine ? 'green' : 'orange'}`} />

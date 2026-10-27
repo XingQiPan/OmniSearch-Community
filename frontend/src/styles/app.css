@@ -315,6 +315,171 @@ pre,
   color: var(--accent-text);
 }
 
+/* ------------------------- 大模型中转站推荐位 ------------------------- */
+.relay-spot {
+  display: flex;
+  text-decoration: none;
+  color: inherit;
+  border-radius: var(--r-md);
+  border: 1px solid var(--line-soft);
+  background: linear-gradient(135deg, var(--accent-soft), transparent 62%);
+  transition: border-color var(--dur) var(--ease), transform var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease);
+}
+.relay-spot:hover {
+  border-color: rgba(0, 113, 227, 0.34);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-1px);
+}
+.relay-spot:active {
+  transform: scale(0.995);
+}
+.relay-spot-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 auto;
+  border-radius: 7px;
+  background: var(--accent);
+  color: #fff;
+}
+
+/* 侧栏常驻小卡 */
+.relay-spot.compact {
+  align-items: center;
+  gap: 9px;
+  padding: 9px 10px;
+  margin-bottom: 10px;
+  font-size: 11.5px;
+  color: var(--text-2);
+}
+.relay-spot.compact .relay-spot-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+}
+.relay-spot.compact > svg {
+  color: var(--text-3);
+  flex: 0 0 auto;
+}
+.relay-spot-name {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
+}
+.relay-spot-desc {
+  display: block;
+  font-size: 10.5px;
+  color: var(--text-3);
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* 页面内横幅 */
+.relay-spot.banner {
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 18px 22px;
+  margin: 16px 0 4px;
+}
+.relay-spot-main {
+  min-width: 0;
+}
+.relay-spot-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text);
+}
+.relay-spot-text {
+  margin-top: 7px;
+  font-size: 12.5px;
+  line-height: 1.7;
+  color: var(--text-2);
+  max-width: 62ch;
+}
+.relay-spot-text strong {
+  color: var(--text);
+  font-weight: 600;
+}
+.relay-spot-text strong.nowrap {
+  white-space: nowrap;
+}
+.relay-spot-text code {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--fill);
+  color: var(--accent-text);
+}
+.relay-spot-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+.relay-spot-chip {
+  font-size: 10.5px;
+  padding: 2px 8px;
+  border-radius: var(--r-pill);
+  background: var(--fill);
+  color: var(--text-2);
+  white-space: nowrap;
+}
+.relay-spot-chip.accent {
+  background: var(--accent-soft);
+  color: var(--accent-text);
+  font-weight: 600;
+}
+.relay-spot-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+.relay-spot-url {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-3);
+}
+.relay-spot-go {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 7px 14px;
+  border-radius: var(--r-pill);
+  background: var(--accent);
+  color: #fff;
+  white-space: nowrap;
+}
+@media (max-width: 900px) {
+  .relay-spot.banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 16px 18px;
+  }
+  .relay-spot-cta {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
 .sidebar-foot {
   border-top: 1px solid var(--line-soft);
   padding: 12px 8px 2px;

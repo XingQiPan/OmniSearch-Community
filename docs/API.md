@@ -6,6 +6,14 @@
 - 在线接口文档（Swagger，仅含 `/v1/*`）：`/docs/api`
 - 机器可读 Schema：`/openapi-public.json`
 
+> **配模型？不用一家家注册。** 本站只汇聚搜索渠道；需要 GPT / Claude / Gemini / DeepSeek、
+> 生图、视频、语音或语义重排模型时，可以直接接入 **[星盘中转站](https://xingpan.site)**：
+> 一个 Key 覆盖主流厂商，原生 OpenAI / Anthropic / Gemini 三套协议，国内直连、按量计费。
+>
+> 在控制台「模型与重排 → 大模型配置」新建一条 **OpenAI 兼容** 渠道，
+> Base URL 填 `xingpan.site`，粘贴它生成的 Key 即可，模型名照抄上游列表。
+> 语义重排同理，Base URL 相同、路径走 `/v1/rerank`。
+
 ---
 
 ## 1. 快速开始
