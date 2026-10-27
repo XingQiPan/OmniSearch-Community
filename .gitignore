@@ -1,0 +1,21 @@
+*.db
+*.sqlite3
+data/
+# 本地私有树：参考源码、临时产物、依赖缓存，均不随仓库分发
+参考/
+tmp/
+.venv/
+node_modules/
+dist/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.env
+.env.*
+*.key
+*.pem
+*.log
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

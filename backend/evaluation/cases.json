@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "rubric": {
+    "relevance": "人工逐个检查实采URL与正文：1=直接支持本题至少一个必要信息需求且适用题目时间范围；0=无关、仅关键词命中、无法支持需求或明确处于错误时期。未检查保持null；无法访问不要猜测，保留null并记录原因。",
+    "citation": "逐项核验回答中的原文claim与其citation：supported=该引用原文足以支持整项事实及其时间限定；unsupported=原文矛盾或不足以支持；uncertain=证据缺失、无法读取或存在无法解决的歧义。不得按域名权威性或有链接就判支持。",
+    "temporal": "人工填写correct/incorrect/uncertain；区分发布时间、更新时间、事件时间和抓取时间。以采集时刻或题目指定历史截点判断，不根据日期可解析自动判真。非时效事实可not_applicable，须说明理由。",
+    "claim_inventory": "模板仅从实采回答逐行提取候选claim，不是事实真值。人工确认factual，必要时按answer的精确字符区间拆分或补齐遗漏的事实；检查完整性后才设置claim_inventory_reviewed=true。"
+  },
+  "cases": [
+    {
+      "id": "cn-01", "category": "中文", "query": "中国居民身份证丢失后如何补领？异地办理需要什么条件与材料？请引用官方办事依据。",
+      "information_needs": ["补领流程、受理机构、所需材料", "异地受理条件与地区差异，不能混用首次申领规则"],
+      "rubric": ["优先公安机关或政府办事指南，逐项检查是否适用于补领", "回答明确地区或适用范围，不能将单地规则说成全国统一"],
+      "temporal": {"kind": "current_policy", "as_of": "collected_at", "criteria": "核验采集时仍有效的政策；旧指南是否失效必须人工确认，日期未知不是当前有效证明。"}
+    },
+    {
+      "id": "cn-02", "category": "中文", "query": "什么是个人养老金制度？参加条件、缴费方式与税收优惠分别是什么？请提供官方依据。",
+      "information_needs": ["制度与参加资格", "缴费规则与税惠适用条件"],
+      "rubric": ["来源直接说明问题而非营销产品", "政策条件、数额与生效范围必须有对应证据，不预填正确数值"],
+      "temporal": {"kind": "current_policy", "as_of": "collected_at", "criteria": "检查政策生效日期与后续修订，不能将历史试点范围当作当前全国范围。"}
+    },
+    {
+      "id": "en-01", "category": "英文", "query": "How do HTTP conditional requests with ETag and If-None-Match work for GET? Cite the relevant standard and explain 304 versus 200.",
+      "information_needs": ["ETag validator and If-None-Match semantics", "Conditions for 304 and 200 responses"],
+      "rubric": ["Prefer the normative HTTP specification and distinguish weak versus strong comparison where relevant", "Each status-code claim must match the cited section"],
+      "temporal": {"kind": "standard", "as_of": "collected_at", "criteria": "确认引用规范是否已被取代，旧文献可以解释历史但不能冒充现行规范。"}
+    },
+    {
+      "id": "en-02", "category": "英文", "query": "Explain the difference between a database transaction's isolation and atomicity, with a concrete dirty-read example and authoritative references.",
+      "information_needs": ["Separate atomicity from isolation", "A dirty-read example and its relationship to isolation levels"],
+      "rubric": ["Prefer database documentation or textbooks, not keyword-only pages", "Do not generalize one database's default isolation level to all products"],
+      "temporal": {"kind": "stable_concept", "as_of": "not_applicable", "criteria": "概念本身非新闻；若回答涉及产品默认配置则核验对应版本，不因页面较旧直接判无关。"}
+    },
+    {
+      "id": "latest-01", "category": "最新版本", "query": "截至现在，Python 最新正式稳定版本是什么？发布时间与官方发行说明在哪里？排除预发布版本。",
+      "information_needs": ["采集时最新稳定版本号及发布日期", "官方release页面，区分稳定版与alpha/beta/rc"],
+      "rubric": ["必须人工检查官方发布列表，不能按搜索排名判最新", "版本号、日期、稳定性与引用逐项匹配，不预填会过时的答案"],
+      "temporal": {"kind": "latest_release", "as_of": "collected_at", "criteria": "以UTC采集时刻为截点；最近30天没有发布不代表旧版本不是最新，抓取日期不等于发布日期。"}
+    },
+    {
+      "id": "latest-02", "category": "最新版本", "query": "What is the latest stable Node.js LTS release available now? Give its version, release date, and official release notes; distinguish Current from LTS.",
+      "information_needs": ["采集时最新LTS稳定发布与日期", "LTS和Current渠道区别及官方证据"],
+      "rubric": ["不能把数值最高的Current版本自动当LTS", "人工检查发行渠道和生效状态，不预填版本真值"],
+      "temporal": {"kind": "latest_release", "as_of": "collected_at", "criteria": "在采集截点核验官方发行日历与发行说明；旧缓存和预发布不能冒充最新LTS。"}
+    },
+    {
+      "id": "academic-01", "category": "学术", "query": "Find the original Attention Is All You Need paper and explain scaled dot-product attention, citing the paper and distinguishing it from later variants.",
+      "information_needs": ["原论文、作者与发表信息", "scaled dot-product attention公式含义与来源"],
+      "rubric": ["原论文或正式论文库优先，博客不能替代原文关键结论", "作者、年份和公式必须逐项核验，不能将后续改进归于原论文"],
+      "temporal": {"kind": "original_publication", "as_of": "original_work", "criteria": "区分预印本首发、修订与会议发表；经典文献不能因年代久而判不相关。"}
+    },
+    {
+      "id": "academic-02", "category": "学术", "query": "检索检索增强生成 RAG 的原始论文，说明其检索器与生成器如何组合，并给出论文中的任务和评测证据。",
+      "information_needs": ["RAG原论文与发表信息", "模型组合机制及论文实际评测任务"],
+      "rubric": ["直接引用论文而非将现代RAG框架文档当作原始成果", "区分论文结论和后来工程实践，评测数字若出现须有原文定位"],
+      "temporal": {"kind": "original_publication", "as_of": "original_work", "criteria": "允许历史原始论文；核对论文版本与发表事件，近期转载不代表新研究。"}
+    },
+    {
+      "id": "history-01", "category": "历史", "query": "截至2020年12月31日，英国脱欧经历了哪些关键法律与过渡期节点？不要混入此后发生的事件。",
+      "information_needs": ["关键退出与过渡节点", "各节点对应法律或官方时间线证据"],
+      "rubric": ["优先法律文本和官方历史时间线", "严格区分退出日期、过渡期结束及后续协议，不预置节点答案"],
+      "temporal": {"kind": "historical_cutoff", "as_of": "2020-12-31T23:59:59Z", "criteria": "事件必须发生于截点前；允许后来出版的回顾资料但须核对所述事件时间，不能只筛页面发布日期。"}
+    },
+    {
+      "id": "history-02", "category": "历史", "query": "What did the original 1991 World Wide Web proposal and early project documentation describe? Distinguish the original design from later web standards.",
+      "information_needs": ["1991时期原始项目文档与设计目标", "原始设计与后续Web标准的区别"],
+      "rubric": ["优先原始存档或机构历史档案", "题目中的年代与proposal称呼也须核验，不能为迎合问题而确认错误前提"],
+      "temporal": {"kind": "historical_period", "as_of": "1991", "criteria": "区分最早提案年份、1991项目文档与后续标准；不能用当前规范倒推当年已实现。"}
+    }
+  ]
+}
